@@ -99,7 +99,7 @@ export default function Home() {
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row items-center max-w-full">
                         <div
-                            className="flex flex-row items-center relative flex-1 cursor-text overflow-x-auto border-l-4 border-primary"
+                            className="flex flex-row items-center relative flex-1 cursor-text overflow-x-hidden border-l-4 border-primary"
                             onClick={() => inputRef.current?.focus()}
                         >
                             <input
