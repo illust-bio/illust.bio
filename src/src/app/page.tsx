@@ -88,7 +88,7 @@ export default function Home() {
     }, []);
 
     return (
-        <main className="flex flex-col items-center py-16 px-8 min-h-screen relative">
+        <main className="flex flex-col items-center py-16 px-6 min-h-screen relative">
             <div className="w-full max-w-xl flex flex-col gap-8">
                 <h1 className="font-mono">ILLUST.BIO</h1>
                 <h6 className="-mt-4">
@@ -288,7 +288,7 @@ export default function Home() {
                 </div>
                 <div></div> {/* Spacer */}
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-row items-center justify-between">
+                    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-8">
                         <div className="flex flex-row items-center gap-8">
                             <Link
                                 href="https://github.com/Nekidev/illust.bio/blob/main/TERMS.md"
