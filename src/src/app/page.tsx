@@ -116,7 +116,7 @@ export default function Home() {
                                 value={inputValue}
                                 onChange={(e) => {
                                     setInputValue(
-                                        e.target.value.replace(" ", "-").replace(
+                                        e.target.value.slice(0, 63).replace(" ", "-").replace(
                                             /[^a-z0-9-]/gi,
                                             ""
                                         ).toLowerCase()
