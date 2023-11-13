@@ -289,12 +289,23 @@ export default function Home() {
                 <div></div> {/* Spacer */}
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row items-center justify-between">
-                        <div className="flex flex-row items-center gap-4">
+                        <div className="flex flex-row items-center gap-8">
                             <Link
                                 href="https://github.com/Nekidev/illust.bio/blob/main/TERMS.md"
                                 className="no-underline"
                             >
                                 Terms of Use
+                            </Link>
+                            <Link
+                                href={`mailto:sponsor@nyeki.dev?subject=${encodeURIComponent(
+                                    "Sponsoring illust.bio"
+                                )}&body=${encodeURIComponent(
+                                    "Hello, and thank you for considering sponsoring this project! You can send me your offer and we'll discuss it. With +200USD yearly your logo gets displayed in the landing page and in the GitHub readme."
+                                )}`}
+                                target="_blank"
+                                className="no-underline"
+                            >
+                                Sponsor
                             </Link>
                         </div>
                         <Link
