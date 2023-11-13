@@ -27,3 +27,4 @@ Mark these filling the [ ] with an x when they're done.
 - [ ] I've specified everything I'm going to do with this subdomain
 - [ ] I've provided enough details to verify that I'm acceptable for the subdomain
 - [ ] I've added all the records I want to add to this subdomain (you can modify these later).
+- [ ] I've read and accepted the [Terms of Use](https//github.com/Nekidev/illust.bio/blob/main/TERMS.md)

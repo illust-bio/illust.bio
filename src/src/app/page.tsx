@@ -131,13 +131,16 @@ export default function Home() {
                         <button
                             className="p-2 border-4 border-primary bg-primary text-on-primary font-bold"
                             style={{
-                                cursor: inputValue.length > 0 ? "pointer" : "not-allowed",
+                                cursor:
+                                    inputValue.length > 0
+                                        ? "pointer"
+                                        : "not-allowed",
                             }}
                             onClick={() => {
                                 if (inputValue.length == 0) {
                                     return;
                                 }
-                                
+
                                 window.location.href = `https://github.com/Nekidev/illust.bio/issues/new?assignees=Nekidev&labels=${encodeURIComponent(
                                     "subdomain request"
                                 )}&template=new-illust-bio-subdomain.md&title=${encodeURIComponent(
@@ -287,7 +290,10 @@ export default function Home() {
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row items-center justify-between">
                         <div className="flex flex-row items-center gap-4">
-                            <Link href="/terms" className="no-underline">
+                            <Link
+                                href="https://github.com/Nekidev/illust.bio/blob/main/TERMS.md"
+                                className="no-underline"
+                            >
                                 Terms of Use
                             </Link>
                         </div>
