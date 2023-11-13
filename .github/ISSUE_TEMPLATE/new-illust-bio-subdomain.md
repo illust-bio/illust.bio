@@ -2,7 +2,7 @@
 name: New illust.bio subdomain
 about: Request a new illust.bio subdomain.
 title: 'Domain request: `REPLACE-ME.illust.bio`'
-labels: ''
+labels: 'subdomain request'
 assignees: Nekidev
 
 ---
