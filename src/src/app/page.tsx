@@ -97,7 +97,7 @@ export default function Home() {
                     to the world! Claim your (sub)domain to get started.
                 </h6>
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center max-w-full">
                         <div
                             className="flex flex-row items-center relative flex-1 cursor-text"
                             onClick={() => inputRef.current?.focus()}
@@ -129,7 +129,7 @@ export default function Home() {
                             <div className="h-6 box-content py-2 border-y-4 border-primary bg-on-primary text-primary font-mono flex-1"></div>
                         </div>
                         <button
-                            className="p-2 border-4 border-primary bg-primary text-on-primary font-bold"
+                            className="p-2 border-4 border-primary bg-primary text-on-primary font-bold whitespace-nowrap"
                             style={{
                                 cursor:
                                     inputValue.length > 0
