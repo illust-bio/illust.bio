@@ -1,0 +1,23 @@
+/* Illust.bio Registry. This file is read-only.
+ * 
+ * Example record:
+ * {
+ *     "subdomain": "your-name",
+ *     "issue": 123,
+ *     "records": [
+ *         {
+ *             "type": "CNAME",
+ *             "name": "@",  // @ is the root of the subdomain, in this case your-name.illust.bio.
+ *             "value": "cname.vercel-dns.com",
+ *             "ttl": 300  // 5 minutes. Can also be "auto" for automatic TTL provided by Cloudflare.
+ *             "proxy": true  // Cloudflare proxy
+ *         }
+ *     ]
+ * }
+ */
+
+{
+    "subdomains": [
+
+    ]
+}
