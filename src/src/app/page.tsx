@@ -16,14 +16,14 @@ export default function Home() {
     const placeholderSuffixes = [
         "name",
         "username",
-        "twitch-handle",
-        "x-handle",
+        "twitch",
+        "twitter",
         "domain",
-        "fanbox-name",
+        "fanbox",
         "character",
         "instagram",
         "nick",
-        "pixiv-name",
+        "pixiv",
     ];
 
     async function writeOnPlaceholder(prefix: string, text: string) {
