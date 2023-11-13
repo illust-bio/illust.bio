@@ -99,13 +99,13 @@ export default function Home() {
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row items-center max-w-full">
                         <div
-                            className="flex flex-row items-center relative flex-1 cursor-text"
+                            className="flex flex-row items-center relative flex-1 cursor-text overflow-x-auto border-l-4 border-primary"
                             onClick={() => inputRef.current?.focus()}
                         >
                             <input
                                 type="text"
                                 placeholder={placeholder}
-                                className="border-4 border-r-0 border-primary bg-on-primary text-secondary outline-none font-mono py-2 pl-2 placeholder:text-primary/50 placeholder:font-normal box-content font-bold"
+                                className="border-y-4 border-primary bg-on-primary text-secondary outline-none font-mono py-2 pl-2 placeholder:text-primary/50 placeholder:font-normal box-content font-bold"
                                 style={{
                                     width:
                                         inputValue.length > 0
@@ -123,7 +123,7 @@ export default function Home() {
                                     );
                                 }}
                             />
-                            <div className="h-full py-2 border-y-4 border-primary bg-on-primary text-primary font-mono">
+                            <div className="h-full py-2 pr-2 border-y-4 border-primary bg-on-primary text-primary font-mono">
                                 .illust.bio
                             </div>
                             <div className="h-6 box-content py-2 border-y-4 border-primary bg-on-primary text-primary font-mono flex-1"></div>
