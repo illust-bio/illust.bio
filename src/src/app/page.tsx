@@ -119,7 +119,7 @@ export default function Home() {
                                         e.target.value.replace(
                                             /[^a-z0-9-]/gi,
                                             ""
-                                        )
+                                        ).toLowerCase()
                                     );
                                 }}
                             />
