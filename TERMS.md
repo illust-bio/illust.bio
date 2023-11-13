@@ -6,10 +6,10 @@ Welcome to illust.bio, a platform providing free subdomains for illustrators. By
 By using illust.bio, you agree to comply with these Terms of Use. If you do not agree, you may not use our services.
 
 ## 2. Use of Subdomains
-illust.bio offers free subdomains exclusively for illustrators. Users are prohibited from using subdomains for anything unrelated to illustrations, including AI art or art reposting.
+illust.bio offers free subdomains exclusively for illustrators. Users are prohibited from using subdomains for anything unrelated to illustrations, including AI-generated art or art reposting.
 
 ## 3. Content Guidelines
-Users are responsible for content on their subdomains, which must adhere to the guidelines specified. Users may not engage in any illegal activity.
+Users are responsible for content on their subdomains, which must adhere to the guidelines specified. Users must not engage in any illegal activity.
 
 ## 4. Liability
 illust.bio is not liable for user actions on their subdomains. Users are solely responsible for their content.
@@ -27,7 +27,7 @@ Refer to our Privacy Policy for information on how we handle personal data.
 Users communicate through GitHub pull requests, issues, or discussions.
 
 ## 9. Subdomain Removal
-illust.bio reserves the right to remove subdomains without notice for violations outlined in Sections 2 and 3.
+illust.bio reserves the right to remove subdomains without notice. This can be (but is not limited to) for violation of sections 2 and 3 of this document.
 
 ## 10. Notice of Removal
 illust.bio may provide notice for subdomain removal but is not obligated to do so.
