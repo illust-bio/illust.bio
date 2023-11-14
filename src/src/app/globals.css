@@ -31,6 +31,15 @@
     ::selection {
         @apply bg-secondary text-on-primary;
     }
+    
+    /* Scrollbar customization */
+    ::-webkit-scrollbar {
+        @apply w-2 bg-primary/30;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-primary;
+    }
 }
 
 @layer components {

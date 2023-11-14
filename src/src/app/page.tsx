@@ -4,12 +4,29 @@ import React from "react";
 
 import Link from "next/link";
 
+import { motion, AnimatePresence } from "framer-motion";
+
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+
+import styles from "./page.module.css";
+
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+interface ErrorMessage {
+    key: string;
+    value: string;
+}
 
 export default function Home() {
     const inputRef = React.useRef<HTMLInputElement>(null);
+    const formContainerRef = React.useRef<HTMLDivElement>(null);
+
+    const [isSubdomainCheckLoading, setIsSubdomainCheckLoading] =
+        React.useState<boolean>(false);
+
     const [inputValue, setInputValue] = React.useState<string>("");
     const [placeholder, setPlaceholder] = React.useState<string>("your-name");
+    const [errorMsgs, setErrorMsgs] = React.useState<ErrorMessage[]>([]);
 
     const typingSpeed = 100; // in milliseconds
 
@@ -87,6 +104,21 @@ export default function Home() {
         };
     }, []);
 
+    function showInputError(message: string) {
+        let errorKey = Math.random().toString();
+
+        setErrorMsgs((v) => [
+            ...v,
+            {
+                key: errorKey,
+                value: message,
+            },
+        ]);
+        setTimeout(() => {
+            setErrorMsgs((v) => v.filter((value) => value.key != errorKey));
+        }, 3000);
+    }
+
     return (
         <main className="flex flex-col items-center py-16 px-6 min-h-screen relative">
             <div className="w-full max-w-xl flex flex-col gap-8">
@@ -97,7 +129,10 @@ export default function Home() {
                     to the world! Claim your (sub)domain to get started.
                 </h6>
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-row items-center max-w-full">
+                    <div
+                        className="flex flex-row items-center max-w-full"
+                        ref={formContainerRef}
+                    >
                         <div
                             className="flex flex-row items-center relative flex-1 cursor-text overflow-x-hidden border-l-4 border-primary"
                             onClick={() => inputRef.current?.focus()}
@@ -116,10 +151,11 @@ export default function Home() {
                                 value={inputValue}
                                 onChange={(e) => {
                                     setInputValue(
-                                        e.target.value.slice(0, 63).replace(" ", "-").replace(
-                                            /[^a-z0-9-]/gi,
-                                            ""
-                                        ).toLowerCase()
+                                        e.target.value
+                                            .slice(0, 63)
+                                            .replace(" ", "-")
+                                            .replace(/[^a-z0-9-]/gi, "")
+                                            .toLowerCase()
                                     );
                                 }}
                             />
@@ -129,15 +165,55 @@ export default function Home() {
                             <div className="h-6 box-content py-2 border-y-4 border-primary bg-on-primary text-primary font-mono flex-1"></div>
                         </div>
                         <button
-                            className="p-2 border-4 border-primary bg-primary text-on-primary font-bold whitespace-nowrap"
+                            className="p-2 border-4 border-primary bg-primary text-on-primary font-bold whitespace-nowrap relative"
                             style={{
                                 cursor:
                                     inputValue.length > 0
                                         ? "pointer"
                                         : "not-allowed",
                             }}
-                            onClick={() => {
+                            onClick={async () => {
                                 if (inputValue.length == 0) {
+                                    formContainerRef.current?.classList.add(
+                                        styles.tremble
+                                    );
+                                    setTimeout(() => {
+                                        formContainerRef.current?.classList.remove(
+                                            styles.tremble
+                                        );
+                                    }, 500);
+
+                                    return;
+                                }
+
+                                if (isSubdomainCheckLoading) return;
+
+                                setIsSubdomainCheckLoading(true);
+
+                                const res = await fetch(
+                                    "/api/check-availability?subdomain=" +
+                                        encodeURIComponent(inputValue)
+                                );
+
+                                let data: {
+                                    available: boolean;
+                                };
+
+                                try {
+                                    data = await res.json();
+                                } catch (e) {
+                                    showInputError(
+                                        "Sorry! There was an error while checking for availability."
+                                    );
+                                    setIsSubdomainCheckLoading(false);
+                                    return;
+                                }
+
+                                if (!data.available) {
+                                    showInputError(
+                                        "Sorry, this subdomain is already taken. You can try another one!"
+                                    );
+                                    setIsSubdomainCheckLoading(false);
                                     return;
                                 }
 
@@ -148,12 +224,53 @@ export default function Home() {
                                 )}`;
                             }}
                         >
-                            CLAIM IT!
+                            {isSubdomainCheckLoading && (
+                                <div className="h-6 w-6 absolute top-0 bottom-0 left-0 right-0 m-auto border-4 border-on-primary rounded-full border-r-transparent animate-spin"></div>
+                            )}
+                            <span
+                                style={{
+                                    opacity: isSubdomainCheckLoading ? 0 : 1,
+                                }}
+                            >
+                                CLAIM IT!
+                            </span>
                         </button>
                     </div>
                     <p className="text-sm">
                         Only letters, numbers, and hyphens are allowed.
                     </p>
+                    <AnimatePresence>
+                        {errorMsgs.map(
+                            (value: ErrorMessage): React.ReactNode => {
+                                return (
+                                    <motion.div
+                                        key={value.key}
+                                        initial={{
+                                            opacity: 0,
+                                            height: 0,
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            height: "auto",
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            height: 0,
+                                        }}
+                                        transition={{
+                                            duration: 0.2,
+                                        }}
+                                        className="text-sm flex flex-row items-center gap-1"
+                                    >
+                                        <ExclamationTriangleIcon className="h-4 w-4 mt-0.5" />
+                                        <div className="leading-none">
+                                            {value.value}
+                                        </div>
+                                    </motion.div>
+                                );
+                            }
+                        )}
+                    </AnimatePresence>
                 </div>
                 <p>
                     Your page needs to have a reasonable (amount of) content and
@@ -236,7 +353,8 @@ export default function Home() {
                             them!
                         </li>
                         <li>
-                            <b>It's never hidden.</b> Links like linktr.ee/
+                            <b>Your name is never hidden.</b> Links like
+                            linktr.ee/
                             {inputValue.length > 0
                                 ? inputValue
                                 : "your-name"}{" "}
@@ -354,7 +472,7 @@ function Step({
         >
             <div className="flex flex-col items-center gap-1 min-h-full">
                 <div className={`w-1 h-1 ${hasTop ? "bg-primary" : ""}`}></div>
-                <div className="border-2 border-primary h-7 w-7 relative flex flex-col items-center justify-center text-primary font-bold">
+                <div className="border-2 border-primary h-7 w-7 flex flex-col items-center justify-center text-primary font-bold bg-on-primary select-none">
                     {number}
                 </div>
                 <div
