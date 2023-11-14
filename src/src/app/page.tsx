@@ -150,13 +150,27 @@ export default function Home() {
                                 ref={inputRef}
                                 value={inputValue}
                                 onChange={(e) => {
-                                    setInputValue(
-                                        e.target.value
-                                            .slice(0, 63)
-                                            .replace(" ", "-")
-                                            .replace(/[^a-z0-9-]/gi, "")
-                                            .toLowerCase()
+                                    let currentValue = e.target.value
+                                        .slice(0, 63)
+                                        .replace(" ", "-")
+                                        .toLowerCase();
+                                    let parsedValue = currentValue.replace(
+                                        /[^a-z0-9-]/gi,
+                                        ""
                                     );
+
+                                    setInputValue(parsedValue);
+
+                                    if (currentValue.includes(".")) {
+                                        showInputError(
+                                            "We don't support fourth-level domains, sorry!"
+                                        );
+                                    }
+                                    if (currentValue.includes("_")) {
+                                        showInputError(
+                                            "We don't support underscores. Try with dashes instead!"
+                                        );
+                                    }
                                 }}
                             />
                             <div className="h-full py-2 pr-2 border-y-4 border-primary bg-on-primary text-primary font-mono">
@@ -236,7 +250,9 @@ export default function Home() {
                             </span>
                         </button>
                     </div>
-                    <p className="text-sm">
+                    <p
+                        className="text-sm"
+                    >
                         Only letters, numbers, and hyphens are allowed.
                     </p>
                     <AnimatePresence>
